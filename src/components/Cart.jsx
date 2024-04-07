@@ -9,7 +9,7 @@ import SingleImage from './image/ SingleImage';
 import Typhography from './image/Typhography';
 
 function Cart() {
-  const { cartItems, updateQuantity, removeItem, calculateTotal, numberProduct } = useCartContext();
+  const { cartItems, updateQuantity, removeItem, total, numberProduct, timestamp, handleUpdateTime } = useCartContext();
 
   return (
     <div className="card">
@@ -18,8 +18,12 @@ function Cart() {
         <div>Total: {numberProduct()}</div>
       </div>
       <div className="cardTitle">
+        <span>Update time</span>
+        <span className="card_amount" onClick={handleUpdateTime}>{timestamp}</span>
+      </div>
+      <div className="cardTitle">
         <span>Your cart</span>
-        <span className="card_amount">{calculateTotal()}</span>
+        <span className="card_amount">{total}</span>
       </div>
       <div className="cardBody">
         {cartItems.map((item, index) => (

@@ -14,6 +14,8 @@ const fakeApi = (data) => {
 export const CartProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
+  const [timestamp, setTimestamp] = useState(Date.now());
+
 
   useEffect(() => {
     fakeApi(dataProducts).then((data) => setProducts(data.data));
@@ -35,29 +37,46 @@ export const CartProvider = ({ children }) => {
     setCartItems(updatedCart);
   };
 
-  const calculateTotal = () => {
+  // const calculateTotal = () => {
+  //   console.log('calculteTotla')
+  //   return cartItems
+  //     .reduce((total, item) => {
+  //       const itemPrice = parseFloat(item.price.replace('$', '')) || 0;
+  //       return total + itemPrice * item.quantity;
+  //     }, 0)
+  //     .toFixed(2);
+  // };
+
+  const total = React.useMemo(() => {
+    console.log('useMemo total')
     return cartItems
       .reduce((total, item) => {
         const itemPrice = parseFloat(item.price.replace('$', '')) || 0;
         return total + itemPrice * item.quantity;
-      }, 0)
-      .toFixed(2);
-  };
+      }, 0).toFixed(2);
+  }, [cartItems])
 
   const numberProduct = () => {
     return cartItems.reduce((total, item) => total + item.quantity, 0);
   };
+
+  function handleUpdateTime() {
+    setTimestamp(Date.now())
+  }
 
   return (
     <CartContext.Provider
       value={{
         products,
         cartItems,
+        timestamp,
+        handleUpdateTime,
         addToCart,
         updateQuantity,
         removeItem,
-        calculateTotal,
+        // calculateTotal,
         numberProduct,
+        total
       }}
     >
       {children}
