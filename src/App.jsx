@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { CartProvider } from './components/CartContext';
+import { CartProvider } from './context/CartContext';
 import ProductList from './components/ProductList';
 import Cart from './components/Cart';
 function App() {

@@ -409,3 +409,7 @@ body {
   font-weight: bold;
   cursor: pointer;
 }
+
+.typhography {
+  text-align: left;
+}

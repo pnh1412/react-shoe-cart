@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
-import { CartContext } from './CartContext';
+import React from 'react';
+import { useCartContext } from '../context/CartContext';
 
 function ProductList() {
-  const { products, addToCart } = useContext(CartContext);
+  const { products, addToCart } = useCartContext();
 
   return (
     <div className="card">

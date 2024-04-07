@@ -1,9 +1,15 @@
-import React, { useContext } from 'react';
-import { CartContext } from './CartContext';
+import React from 'react';
 import { FaTrash } from 'react-icons/fa';
 
+// context
+import { useCartContext } from '../context/CartContext';
+
+// components
+import SingleImage from './image/ SingleImage';
+import Typhography from './image/Typhography';
+
 function Cart() {
-  const { cartItems, updateQuantity, removeItem, calculateTotal, numberProduct } = useContext(CartContext);
+  const { cartItems, updateQuantity, removeItem, calculateTotal, numberProduct } = useCartContext();
 
   return (
     <div className="card">
@@ -20,12 +26,15 @@ function Cart() {
           <div className="cardItem" key={index}>
             <div className="cardItem_left">
               <div className="cardItem_image">
-                <img alt={item.name} src={item.image} />
+                <SingleImage 
+                  alt={item.name}
+                  src={item.image}
+                />
               </div>
             </div>
             <div className="cardItem_right">
-              <div className="cardItem_name">{item.name}</div>
-              <div className="cardItem_price">{item.price}</div>
+              <div className="cardItem_name"><Typhography text={item.name} className="font-bold" /></div>
+              <div className="cardItem_price"><Typhography text={item.price} className="font-bold text-[20px]" /></div>
               <div className="cartItem_actions">
                 <div className="cartItem_count">
                   <div className="cartItem_button" onClick={() => updateQuantity(index, item.quantity - 1)}>
